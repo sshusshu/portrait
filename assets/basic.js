@@ -209,50 +209,49 @@ function start(){
                
              C ${points[27]._x-20},${points[27]._y}
                ${points[30]._x+10},${points[30]._y}
-               ${points[30]._x+10},${points[30]._y}
-               
-             C ${points[30]._x-40},${points[33]._y-50}
-               ${points[30]._x+50},${points[33]._y-50}
-               ${points[30]._x+10},${points[30]._y}
-               
-             L ${points[35]._x},${points[35]._y}
-             C ${points[35]._x+40},${points[35]._y}
-               ${points[35]._x},${points[35]._y-40}
-               ${points[35]._x},${points[35]._y}
+               ${points[33]._x},${points[33]._y}
              
-             L ${points[33]._x},${points[33]._y} 
-               ${points[31]._x},${points[31]._y} 
-             C ${points[31]._x-40},${points[31]._y}
-               ${points[31]._x},${points[31]._y-40}
-               ${points[31]._x},${points[31]._y}  
               
-              //입
+             C ${points[33]._x-10},${points[33]._y+10}
+               ${points[31]._x},${points[31]._y+10}
+               ${points[31]._x},${points[31]._y}
+             C ${points[31]._x},${points[31]._y-10}
+               ${points[33]._x-10},${points[33]._y-10}
+               ${points[33]._x},${points[33]._y}
               
-             L ${points[62]._x},${points[62]._y} 
+             C ${points[33]._x-40},${points[33]._y-50}
+               ${points[33]._x+50},${points[33]._y-50}
+               ${points[33]._x},${points[33]._y} 
+           
+             C ${points[33]._x+10},${points[33]._y+10}
+               ${points[35]._x},${points[35]._y+10}
+               ${points[35]._x},${points[35]._y}
+             C ${points[35]._x},${points[35]._y-10}
+               ${points[33]._x-10},${points[33]._y-10}
+               ${points[33]._x},${points[33]._y}
+               
               
-              
-              
-        // ctx.lineTo(points[62]._x,points[62]._y);
-        // ctx.lineTo(points[48]._x,points[48]._y);
-        // ctx.lineTo(points[50]._x,points[50]._y);
-        // ctx.lineTo(points[51]._x,points[51]._y);
-        // ctx.lineTo(points[52]._x,points[52]._y);
-        // ctx.lineTo(points[54]._x,points[54]._y);
-        // ctx.lineTo(points[57]._x,points[57]._y);
-        // ctx.lineTo(points[59]._x,points[59]._y);
-        // ctx.lineTo(points[58]._x,points[58]._y); 
+             L ${points[62]._x},${points[62]._y}     
+               ${points[48]._x},${points[48]._y}
+               ${points[50]._x},${points[50]._y}
+               ${points[51]._x},${points[51]._y}
+               ${points[52]._x},${points[52]._y}
+               ${points[54]._x},${points[54]._y}
+               ${points[57]._x},${points[57]._y}
+               ${points[59]._x},${points[59]._y}
+               ${points[58]._x},${points[58]._y} 
            " 
             fill = "none"
-            stroke="#f1f1f1"
+            stroke="#000"
             stroke-width="1"
             stroke-linecap="round"
-            
             />
     </svg>`
 
         document.body.append(box)
     })
 }
+
 
 
 
