@@ -3,10 +3,16 @@ body{
     padding: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
+}
+.container{position: relative;}
+#myImg{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 canvas{
     position: absolute;
