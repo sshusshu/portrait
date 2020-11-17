@@ -103,7 +103,7 @@ function start(){
             }
           }
 
-          const chin = points[8]._y + (points[7]._y-points[6]._y)
+          const chin = points[8]._y + ((points[7]._y-points[6]._y)/2)
           
 
         // ctx.beginPath();
@@ -268,59 +268,109 @@ const box = document.createElement('div')
                ${nose.l.x},${nose.l.y}
        
              C ${nose.l.x},${nose.l.y}
-               ${points[33]._x-10},${points[33]._y+10}
+               ${points[33]._x-10},${points[33]._y+5}
                ${points[31]._x},${points[31]._y}
                
              C ${points[31]._x},${points[31]._y-5}
                ${points[32]._x+5},${points[32]._y-5}
                ${points[32]._x+5},${points[32]._y}
                        
-             Q ${points[33]._x},${points[33]._y+5}
+             Q ${points[33]._x},${points[33]._y+3}
                ${points[34]._x-5},${points[34]._y}
             
              C ${points[34]._x-5},${points[34]._y-5}
                ${points[35]._x},${points[35]._y-5}
                ${points[35]._x},${points[35]._y}
                
-             C ${points[33]._x+10},${points[33]._y+10}
+             C ${points[33]._x+10},${points[33]._y+5}
                ${nose.r.x},${nose.r.y}
                ${nose.r.x},${nose.r.y}
                
              C ${nose.r.x+5},${nose.r.y}
                ${nose.r.x+5},${nose.r.y-20}
                ${nose.r.x},${nose.r.y-20}
-             
-             C ${points[33]._x-noseRadius*1.5},${points[33]._y}
-               ${points[30]._x-noseRadius*1.5},${points[30]._y-noseRadius}
-               ${points[30]._x},${points[30]._y-noseRadius}
-             
-             C ${points[30]._x+noseRadius*1.5},${points[30]._y}
-               ${points[33]._x+noseRadius*1.5},${points[33]._y}
+
+             C ${nose.r.x-5},${nose.r.y-35}
+               ${points[33]._x+10},${points[33]._y-20}
                ${points[33]._x},${points[33]._y}
-               
+             
+             C ${points[33]._x-noseRadius*1.2},${points[33]._y}
+               ${points[30]._x-noseRadius*1.2},${points[30]._y-noseRadius}
+               ${points[30]._x},${points[30]._y-noseRadius}
+
+             C ${points[30]._x+noseRadius*1.2},${points[30]._y-noseRadius}
+               ${points[33]._x+noseRadius*1.2},${points[33]._y}
+               ${points[33]._x},${points[33]._y}
+
              C ${points[33]._x+10},${points[33]._y}
-               ${points[51]._x+10},${points[51]._y}
-               ${points[51]._x},${points[51]._y}
+               ${points[62]._x},${points[48]._y}
+               ${points[48]._x},${points[48]._y}
+             
+             C ${points[48]._x},${points[48]._y-5}
+               ${points[50]._x},${points[50]._y-5} 
+               ${points[50]._x},${points[50]._y} 
+
+             L ${points[51]._x},${points[51]._y}  
+               ${points[52]._x},${points[52]._y} 
+
+             C ${points[52]._x},${points[52]._y-5}
+               ${points[54]._x},${points[54]._y-5}
+               ${points[54]._x},${points[54]._y}
+
+             C ${points[54]._x-5},${points[54]._y+5}
+               ${points[62]._x+5},${points[62]._y+5} 
+               ${points[62]._x},${points[62]._y}
+
+             C ${points[62]._x-5},${points[62]._y+5}
+               ${points[48]._x+5},${points[48]._y+5}
+               ${points[48]._x},${points[48]._y}
             
-             L ${points[50]._x},${points[50]._y}  
-             C ${points[50]._x},${points[50]._y-5}  
-               ${points[48]._x},${points[48]._y}
-               ${points[48]._x},${points[48]._y}
-              
-             L ${points[62]._x},${points[62]._y}
-               ${points[54]._x},${points[54]._y}
-               ${points[62]._x},${points[62]._y} 
-               ${points[52]._x},${points[52]._y}
-               ${points[54]._x},${points[54]._y}
+             C ${points[48]._x+5},${points[48]._y+5}
+               ${points[57]._x-20},${points[57]._y+5}
                ${points[57]._x},${points[57]._y}
-               ${points[59]._x},${points[59]._y}
-               ${points[58]._x},${points[58]._y} 
 
-               ${points[8]._x}, ${points[8]._y}
+             C ${points[57]._x+20},${points[57]._y+5}
+               ${points[54]._x-5},${points[54]._y+5}
+               ${points[54]._x},${points[54]._y}
 
-                ${points[7]._x},${points[7]._y}
-                ${points[5]._x},${points[5]._y}
-                ${points[2]._x},${points[2]._y}
+             C ${points[54]._x},${points[54]._y+5}
+               ${points[57]._x},${points[57]._y+5}
+               ${points[57]._x},${points[57]._y}
+
+             C ${points[57]._x+30},${points[57]._y}
+               ${points[8]._x+30}, ${chin}
+               ${points[8]._x}, ${chin}
+
+             C ${points[8]._x}, ${chin+10}
+               ${points[5]._x+5},${points[5]._y+10}
+               ${points[5]._x},${points[5]._y}
+             
+             L ${points[4]._x}, ${points[4]._y+10}
+
+             C ${points[4]._x},${points[4]._y+10}
+               ${points[2]._x},${points[2]._y+20}
+               ${points[2]._x},${points[2]._y+10}
+
+             C ${points[2]._x-40},${points[2]._y}
+               ${points[0]._x-40},${points[0]._y-30}
+               ${points[0]._x},${points[0]._y}
+
+
+
+             C ${points[0]._x+10},${points[0]._y}
+               ${points[1]._x+10},${points[1]._y}
+               ${points[1]._x},${points[1]._y}
+
+             C ${points[1]._x-20},${points[1]._y+30}
+               ${points[1]._x-20},${points[1]._y-30}
+               ${points[1]._x},${points[1]._y}
+             
+             C ${points[1]._x+10},${points[1]._y}
+               ${points[2]._x+10},${points[2]._y+10}
+               ${points[2]._x},${points[2]._y+10}
+       
+            // L  
+                
                 ${points[4]._x},${points[4]._y}
                 ${points[6]._x},${points[6]._y}
                 ${points[8]._x},${points[8]._y+10}
@@ -351,7 +401,7 @@ const box = document.createElement('div')
                 ${points[26]._x},${points[26]._y}
            " 
             fill = "none"
-            stroke="#F1F1F1"
+            stroke="#F5F5F5"
             stroke-width="1"
             stroke-linecap="round"
             />
