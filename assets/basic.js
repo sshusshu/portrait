@@ -45,18 +45,19 @@ function start(){
     input.addEventListener('change',async()=>{
         const image = await faceapi.bufferToImage(input.files[0]);
         img.src = image.src;
-        //img.width = 600;
-        
+        img.style.opacity = '0.2';
         canvas.width = img.width;
         canvas.height = img.height;
+        canvas.style.opacity = '0.5';
+
 
         const displaySize = {width:canvas.width, height:canvas.height};
         const detecting = await faceapi.detectSingleFace(img).withFaceLandmarks()
         faceapi.matchDimensions(canvas, displaySize);
-        const points = detecting.landmarks._positions
+        const points = detecting.landmarks.positions
 
-        console.log(detecting)
-      
+
+
         for(let i =0;i<points.length;i++){
           ctx.fillText ( `${i}`,points[i]._x,points[i]._y)
           ctx.beginPath();
@@ -64,7 +65,6 @@ function start(){
           ctx.stroke();
           ctx.closePath();
         }
-
         const lefteye = { 
           r:{
             x:points[39]._x +((points[38]._x - points[37]._x)/2) , 
@@ -76,20 +76,25 @@ function start(){
             },
           center: {
             x:points[37]._x+((points[38]._x - points[37]._x)/2),
-            y:points[41]._y+7
+            y:points[40]._y+5
             },
             radius : ((points[38]._x - points[37]._x)/2)
           }
 
         const righteye = { 
           r:{
-            x:points[25]._x, 
-            y:points[44]._y + ((points[44]._y+5 - points[46]._y)/2)
+            x:points[45]._x+5,
+            y:points[44]._y + ((points[46]._y+5 - points[44]._y)/2)
             },
           l:{
-            x:points[35]._x + ((points[42]._x-points[35]._x)/2),
+            x:points[42]._x - ((points[42]._x-points[35]._x)/2),
             y:points[47]._y
-            }
+            },
+            center: {
+                x:points[43]._x+((points[44]._x - points[43]._x)/2),
+                y:points[47]._y+5
+            },
+            radius : ((points[44]._x - points[43]._x)/2)
           }
 
           const nose = {
@@ -104,90 +109,14 @@ function start(){
           }
 
           const chin = points[8]._y + ((points[7]._y-points[6]._y)/2)
-          
-
-        // ctx.beginPath();
-        // ctx.strokeStyle = '#555'
-        // ctx.moveTo(points[17]._x,points[17]._y-100)
-        // //왼쪽 눈썹
-        //     ctx.lineTo(points[17]._x,points[17]._y);
-        //     ctx.lineTo(points[18]._x,points[18]._y);
-        //     ctx.lineTo(points[21]._x,points[21]._y);
-        //     ctx.lineTo(points[21]._x+15,points[21]._y+15);
-        //     ctx.lineTo(points[18]._x,points[18]._y+15);
-        //     ctx.lineTo(points[17]._x,points[17]._y+15);
-        // //왼쪽 눈
-        // ctx.lineTo(points[36]._x-15,points[36]._y+15);
-        // ctx.lineTo(points[37]._x,points[37]._y-5);
-        // ctx.lineTo(points[38]._x,points[38]._y-5);
-        // ctx.lineTo(points[39]._x+10,points[39]._y+10);
-        // ctx.lineTo(points[38]._x,points[38]._y);
-        // ctx.arc(points[38]._x-10,points[38]._y+10,10,Math.PI*1.5,Math.PI*3.5,false)
-        // ctx.lineTo(points[37]._x,points[37]._y);
-        // ctx.lineTo(points[36]._x-20,points[36]._y+15);
-        // ctx.lineTo(points[41]._x,points[41]._y+5);
-        // ctx.lineTo(points[40]._x,points[40]._y+5);
-        // ctx.lineTo(points[39]._x+10,points[39]._y+10);
-        // //볼
-        // ctx.lineTo(points[39]._x+10,points[39]._y+20);
-        // ctx.lineTo(points[36]._x-15,points[36]._y+25);
-        // ctx.lineTo(points[37]._x,points[30]._y);
-        // //코
-        // ctx.lineTo(points[27]._x,points[27]._y);
-        // ctx.lineTo(points[30]._x,points[30]._y);
-        // ctx.arc(points[30]._x,points[30]._y,15,Math.PI*0.5,Math.PI*2.5,false)
-        // ctx.lineTo(points[35]._x,points[35]._y);
-        // ctx.arc(points[35]._x-10,points[35]._y,10,Math.PI*0.5,Math.PI*2.5,false)
-        // ctx.lineTo(points[31]._x,points[31]._y);
-        // ctx.arc(points[31]._x,points[31]._y,10,Math.PI*0.5,Math.PI*2.5,false)
-        // ctx.lineTo(points[33]._x,points[33]._y);
-
-        // //턱
-        // ctx.lineTo(points[8]._x,points[8]._y);
-        // ctx.arc(points[8]._x,points[8]._y,30,Math.PI*1.5,Math.PI*4.5,false)
-        // //볼라인
-        // ctx.lineTo(points[7]._x,points[7]._y);
-        // ctx.lineTo(points[5]._x,points[5]._y);
-        // ctx.lineTo(points[2]._x,points[2]._y);
-        // ctx.lineTo(points[4]._x,points[4]._y);
-        // ctx.lineTo(points[6]._x,points[6]._y);
-        // ctx.lineTo(points[8]._x,points[8]._y+10);
-        // ctx.lineTo(points[9]._x,points[9]._y);
-        // ctx.lineTo(points[12]._x,points[12]._y);
-        // ctx.lineTo(points[15]._x,points[15]._y);
-        // //오른쪽 눈
-        // ctx.lineTo(points[45]._x+15,points[45]._y+15);
-        // ctx.lineTo(points[46]._x,points[46]._y+15);
-        // ctx.lineTo(points[47]._x,points[47]._y+15);
-        // ctx.lineTo(points[42]._x-15,points[42]._y+15);
-        // ctx.lineTo(points[47]._x,points[47]._y+5);
-        // ctx.lineTo(points[46]._x,points[46]._y+5);
-        // ctx.lineTo(points[45]._x+15,points[45]._y+15);
-        // ctx.lineTo(points[44]._x,points[44]._y);
-        // ctx.lineTo(points[43]._x,points[43]._y);
-        // ctx.arc(points[43]._x+10,points[43]._y+10,10,Math.PI*1.5,Math.PI*3.5,false)
-        // ctx.lineTo(points[42]._x-15,points[42]._y+10);
-        // ctx.lineTo(points[43]._x,points[43]._y-5);
-        // ctx.lineTo(points[44]._x,points[44]._y-5);
-        // ctx.lineTo(points[45]._x+20,points[45]._y+10);
-        // //오른쪽 눈썹
-        // ctx.lineTo(points[26]._x,points[26]._y+15);
-        // ctx.lineTo(points[25]._x,points[25]._y+15);
-        // ctx.lineTo(points[22]._x,points[22]._y+15);
-        // ctx.lineTo(points[22]._x-15,points[22]._y);
-        // ctx.lineTo(points[22]._x,points[22]._y);
-        // ctx.lineTo(points[25]._x,points[25]._y);
-        // ctx.lineTo(points[26]._x,points[26]._y);
-        
-        
-        // ctx.stroke()
-        // ctx.closePath()
 
 const box = document.createElement('div')
         const noseRadius = points[33]._y-points[30]._y
         box.innerHTML =
    `<svg width="1000" height="1000" viewBox="0 0 1000 1000">
-    <path d="M ${points[17]._x}, ${points[17]._y-100}
+        
+    <path id="line"
+            d="M ${points[17]._x}, ${points[17]._y-100}
              C ${points[17]._x-20},${points[17]._y-95} 
                ${points[17]._x-20},${points[17]._y+5}
                ${points[17]._x}, ${points[17]._y}
@@ -219,18 +148,27 @@ const box = document.createElement('div')
                ${lefteye.r.x},${lefteye.r.y-5}
             
              L ${lefteye.r.x},${lefteye.r.y}
+             
              C ${lefteye.r.x},${lefteye.r.y-5}
                ${points[38]._x+5},${points[38]._y}
                ${points[38]._x},${points[38]._y}
-             
-             C ${points[38]._x+5},${points[38]._y+lefteye.radius}
-               ${lefteye.center.x+lefteye.radius},${lefteye.center.y}  
-               ${lefteye.center.x},${lefteye.center.y} 
-             
-             C ${lefteye.center.x - lefteye.radius},${lefteye.center.y} 
-               ${points[37]._x-5},${points[37]._y+lefteye.radius}
+               
+             C ${points[38]._x},${points[38]._y-3}
+               ${points[37]._x},${points[37]._y-3}
                ${points[37]._x},${points[37]._y}
              
+             C ${points[37]._x-5},${points[37]._y+lefteye.radius}
+               ${lefteye.center.x - lefteye.radius},${lefteye.center.y} 
+               ${lefteye.center.x},${lefteye.center.y} 
+               
+             C ${lefteye.center.x+lefteye.radius},${lefteye.center.y}
+               ${points[38]._x+5},${points[38]._y+lefteye.radius}
+               ${points[38]._x},${points[38]._y}
+               
+             C ${points[38]._x},${points[38]._y-3}
+               ${points[37]._x},${points[37]._y-3}
+               ${points[37]._x},${points[37]._y}
+               
              C ${lefteye.center.x-10},${points[38]._y}
                ${lefteye.l.x+5},${lefteye.l.y-10}
                ${lefteye.l.x},${lefteye.l.y}
@@ -355,8 +293,6 @@ const box = document.createElement('div')
                ${points[0]._x-40},${points[0]._y-30}
                ${points[0]._x},${points[0]._y}
 
-
-
              C ${points[0]._x+10},${points[0]._y}
                ${points[1]._x+10},${points[1]._y}
                ${points[1]._x},${points[1]._y}
@@ -369,41 +305,101 @@ const box = document.createElement('div')
                ${points[2]._x+10},${points[2]._y+10}
                ${points[2]._x},${points[2]._y+10}
        
-            // L  
+             L ${points[4]._x},${points[4]._y}
+               ${points[5]._x},${points[5]._y}
+               ${points[6]._x},${points[6]._y}
+               ${points[7]._x},${points[7]._y+5}
+            
+             C ${points[7]._x+10},${points[7]._y+15}
+               ${points[8]._x-10},${points[8]._y+20}
+               ${points[8]._x},${points[8]._y+10}
+              
+              
+             C ${points[8]._x+10},${points[8]._y+20}
+               ${points[9]._x-10},${points[9]._y+15}
+               ${points[9]._x},${points[9]._y+5}
+               
+             L ${points[10]._x},${points[10]._y}
+               ${points[11]._x},${points[11]._y}
+               ${points[12]._x},${points[12]._y}
+               ${points[13]._x},${points[13]._y}
+               ${points[14]._x},${points[14]._y}
+               ${points[15]._x},${points[15]._y}
+               ${points[24]._x},${righteye.r.y+20}
+             
+             C ${points[24]._x},${righteye.r.y+20}
+               ${righteye.l.x},${righteye.l.y+10}
+               ${righteye.l.x},${righteye.l.y}
+               
+             C ${righteye.l.x},${righteye.l.y-3}
+               ${points[42]._x},${points[42]._y+3}
+               ${points[42]._x},${points[42]._y}
+               
+             C ${points[42]._x},${points[42]._y+10}
+               ${righteye.center.x-10},${righteye.center.y}
+               ${righteye.center.x},${righteye.center.y}
+                 
+             C ${righteye.center.x+10},${righteye.center.y}
+               ${righteye.r.x},${righteye.r.y+5}
+               ${righteye.r.x},${righteye.r.y}
+               
+             C ${righteye.r.x},${righteye.r.y-5}
+               ${points[44]._x+10},${points[44]._y}
+               ${points[44]._x},${points[44]._y}
+               
+             C ${points[44]._x},${points[44]._y-3}
+               ${points[43]._x},${points[43]._y-3}
+               ${points[43]._x},${points[43]._y}
+               
+             C ${points[43]._x-5},${points[43]._y+righteye.radius}
+               ${righteye.center.x-righteye.radius},${righteye.center.y}
+               ${righteye.center.x},${righteye.center.y}
+               
+             C ${righteye.center.x + righteye.radius},${righteye.center.y} 
+               ${points[44]._x+5},${points[44]._y+righteye.radius}
+               ${points[44]._x},${points[44]._y}
+             
+             C ${points[44]._x},${points[44]._y-3}
+               ${points[43]._x},${points[43]._y-3}
+               ${points[43]._x},${points[43]._y}
+               
+             C ${points[43]._x-5},${points[43]._y}
+               ${righteye.l.x},${righteye.l.y-5}
+               ${righteye.l.x},${righteye.l.y}
+                    
+             L ${righteye.l.x},${righteye.l.y-5}  
                 
-                ${points[4]._x},${points[4]._y}
-                ${points[6]._x},${points[6]._y}
-                ${points[8]._x},${points[8]._y+10}
-                ${points[9]._x},${points[9]._y}
-                ${points[12]._x},${points[12]._y}
-                ${points[15]._x},${points[15]._y}
-        
-                ${points[45]._x+15},${points[45]._y+15}
-                ${points[46]._x},${points[46]._y+15}
-                ${points[47]._x},${points[47]._y+15}
-                ${points[42]._x-15},${points[42]._y+15}
-                ${points[47]._x},${points[47]._y+5}
-                ${points[46]._x},${points[46]._y+5}
-                ${points[45]._x+15},${points[45]._y+15}
-                ${points[44]._x},${points[44]._y}
-                ${points[43]._x},${points[43]._y}
-                ${points[42]._x-15},${points[42]._y+10}
-                ${points[43]._x},${points[43]._y-5}
-                ${points[44]._x},${points[44]._y-5}
-                ${points[45]._x+20},${points[45]._y+10}
-        
-                ${points[26]._x},${points[26]._y+15}
-                ${points[25]._x},${points[25]._y+15}
-                ${points[22]._x},${points[22]._y+15}
-                ${points[22]._x-15},${points[22]._y}
-                ${points[22]._x},${points[22]._y}
-                ${points[25]._x},${points[25]._y}
-                ${points[26]._x},${points[26]._y}
+             C ${righteye.l.x},${righteye.l.y-10}  
+               ${points[43]._x-5},${points[43]._y-5} 
+               ${points[43]._x},${points[43]._y-5} 
+             
+             C ${points[43]._x+10},${points[43]._y-10} 
+               ${righteye.r.x},${righteye.r.y-15}
+               ${righteye.r.x+10},${righteye.r.y-5}    
+             
+             C ${righteye.r.x+15},${righteye.r.y-10}
+               ${points[26]._x+10},${points[26]._y+20}
+               ${points[26]._x},${points[26]._y+15}
+                
+             L ${points[25]._x},${points[25]._y+15}
+             C ${points[25]._x},${points[25]._y+10}
+               ${righteye.l.x},${points[22]._y+10}
+               ${righteye.l.x},${points[22]._y+15}
+               
+              C ${righteye.l.x-5},${points[22]._y+15}
+                ${righteye.l.x-5},${points[22]._y}
+                ${righteye.l.x},${points[22]._y}
+                
+              C ${righteye.l.x},${points[22]._y}
+                ${points[25]._x-10},${points[25]._y-10}
+                ${points[25]._x+5},${points[25]._y}
+                
+              L ${points[26]._x+5},${points[26]._y} 
+              
+              C ${points[26]._x+25},${points[26]._y-10} 
+               ${points[26]._x+20}, ${points[26]._y-90}
+               ${points[26]._x}, ${points[26]._y-100}
            " 
-            fill = "none"
-            stroke="#F5F5F5"
-            stroke-width="1"
-            stroke-linecap="round"
             />
     </svg>`
 

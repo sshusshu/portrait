@@ -19,3 +19,20 @@ canvas{
     top: 0;
     left: 0;
 }
+#line{
+    fill : none;
+    stroke:#F5F5F5;
+    stroke-width:1;
+    stroke-linecap:round;
+    stroke-dasharray: 4000; /*이 값은 path의 길이와 동일합니다*/
+    stroke-dashoffset: 0;
+    animation: dash 15s linear;
+}
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 4000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
