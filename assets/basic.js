@@ -45,17 +45,27 @@ function start(){
     input.addEventListener('change',async()=>{
         const image = await faceapi.bufferToImage(input.files[0]);
         img.src = image.src;
-        img.style.opacity = '0.2';
-        canvas.width = img.width;
-        canvas.height = img.height;
-        canvas.style.opacity = '0.5';
+        img.style.opacity='0.3'
+        //canvas.width = img.width;
+        //canvas.height = img.height;
+        const detect = await faceapi.detectSingleFace(img).withFaceLandmarks()
+        const point = detect.landmarks.positions
 
+        const arrX =point.map(a=>a._x)
+        const arrY =point.map(a=>a._y)
+        const sx = Math.min(...arrX)-20
+        const sy = Math.min(...arrY)-20
+        const ex = Math.max(...arrX)+20
+        const ey = Math.max(...arrY)+20
+        const mw = 350;
+        const mh = (mw*(ey-sy))/(ex-sx)
+        console.log(Math.min(...arrX),Math.max(...arrX))
+        canvas.width = mw;
+        canvas.height = mh;
+        ctx.drawImage(image,sx,sy,ex-sx,ey-sy,0,0,mw,mh)
 
-        const displaySize = {width:canvas.width, height:canvas.height};
-        const detecting = await faceapi.detectSingleFace(img).withFaceLandmarks()
-        faceapi.matchDimensions(canvas, displaySize);
+        const detecting = await faceapi.detectSingleFace(canvas).withFaceLandmarks()
         const points = detecting.landmarks.positions
-
 
 
         for(let i =0;i<points.length;i++){
@@ -65,6 +75,7 @@ function start(){
           ctx.stroke();
           ctx.closePath();
         }
+
         const lefteye = { 
           r:{
             x:points[39]._x +((points[38]._x - points[37]._x)/2) , 
@@ -111,6 +122,7 @@ function start(){
           const chin = points[8]._y + ((points[7]._y-points[6]._y)/2)
 
 const box = document.createElement('div')
+        box.classList.add('svgBox')
         const noseRadius = points[33]._y-points[30]._y
         box.innerHTML =
    `<svg width="1000" height="1000" viewBox="0 0 1000 1000">

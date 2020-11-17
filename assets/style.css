@@ -8,7 +8,10 @@ body{
     align-items: center;
     flex-direction: column; */
 }
-.container{position: relative;}
+.container{
+    position: relative;
+    display: flex;
+}
 #myImg{
     position: absolute;
     top: 0;
@@ -18,10 +21,13 @@ canvas{
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
+    border:1px solid #000;
+    margin-bottom: 400px;
 }
 #line{
     fill : none;
-    stroke:#F5F5F5;
+    stroke:#000;
     stroke-width:1;
     stroke-linecap:round;
     stroke-dasharray: 4000; /*이 값은 path의 길이와 동일합니다*/
