@@ -32,6 +32,15 @@
 const input = document.querySelector('input');
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d')
+const preloader = document.createElement('div');
+
+function preloadIng() {
+    preloader.classList.add('preloader');
+    document.body.append(preloader)
+}
+
+input.addEventListener('click',preloadIng);
+input.addEventListener('onload', ()=> preloader.classList.add('hide'));
 
 Promise.all([
     faceapi.nets.ssdMobilenetv1.loadFromUri('./models'),
