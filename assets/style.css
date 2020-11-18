@@ -3,10 +3,6 @@ body{
     padding: 0;
     width: 100vw;
     height: 100vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; */
 }
 .preloader{
     display: block;
@@ -15,7 +11,7 @@ body{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff000;
+    background: #E9E9E9;
 }
 .hide{
     display: none;
@@ -37,13 +33,13 @@ canvas{
 
 .genderLine{
     fill : none;
-    stroke:#f8f8f8;
+    stroke:#E9E9E9;
     stroke-width:1;
     stroke-linecap:round;
 }
 #line{
     fill : none;
-    stroke:#f8f8f8;
+    stroke:#E9E9E9;
     stroke-width:1;
     stroke-linecap:round;
     stroke-dasharray: 4000; /*이 값은 path의 길이와 동일합니다*/
