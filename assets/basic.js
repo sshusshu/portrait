@@ -35,12 +35,13 @@ const ctx = canvas.getContext('2d')
 const preloader = document.createElement('div');
 
 function preloadIng() {
-    preloader.classList.add('preloader');
     document.body.append(preloader)
+    preloader.classList.add('preloader');
+}
+function preloadEnd() {
+  preloader.classList.remove('preloader');
 }
 
-input.addEventListener('click',preloadIng);
-input.addEventListener('onload', ()=> preloader.classList.add('hide'));
 
 Promise.all([
     faceapi.nets.ssdMobilenetv1.loadFromUri('./models'),
@@ -53,8 +54,9 @@ Promise.all([
 
 
 function start(){
-
+  
     input.addEventListener('change',async()=>{
+        preloadIng();
         const image = await faceapi.bufferToImage(input.files[0]);
         const detect = await faceapi.detectSingleFace(image).withFaceLandmarks();
         const point = detect.landmarks.positions;
@@ -69,11 +71,10 @@ function start(){
         const mh = (mw*(ey-sy))/(ex-sx);
         canvas.width = mw;
         canvas.height = mh;
-        canvas.style.opacity = '0'
+        canvas.style.opacity = '1'
         ctx.drawImage(image,sx,sy,ex-sx,ey-sy,0,0,mw,mh);
 
 
-        //const ageGendar = await faceapi.detectSingleFace(canvas).withFaceLandmarks().withAgeAndGender()
         const detecting = await faceapi
             .detectSingleFace(canvas)
             .withFaceLandmarks()
@@ -84,6 +85,7 @@ function start(){
         const points = detecting.landmarks.positions;
         const gender = detecting.gender
         console.log(gender)
+        preloadEnd()
 
         for(let i =0;i<points.length;i++){
           ctx.fillText ( `${i}`,points[i]._x,points[i]._y)
@@ -162,14 +164,15 @@ function start(){
             female:{}
         }
         if (gender === 'female'){
-
+           box1.innerHTML =
+                genderPlant.male.leaf
         }else{
            box1.innerHTML =
                 genderPlant.male.leaf
         }
 
         box2.innerHTML =
-   `<svg width="${mw}" height="${mh}" viewBox="0 0 500 500">    
+   `<svg width="${mw}" height="${mh}" viewBox="0 0 ${mw} ${mh}">    
     <path id="line"
           d="M ${points[17]._x}, ${points[17]._y-100}
              C ${points[17]._x-20},${points[17]._y-95} 
@@ -322,19 +325,25 @@ function start(){
                ${points[48]._x+5},${points[48]._y+5}
                ${points[48]._x},${points[48]._y}
             
-             C ${points[48]._x+5},${points[48]._y+5}
-               ${points[57]._x-20},${points[57]._y+5}
-               ${points[57]._x},${points[57]._y}
-
-             C ${points[57]._x+20},${points[57]._y+5}
-               ${points[54]._x-5},${points[54]._y+5}
+             C ${points[48]._x},${points[48]._y+5}
+               ${points[67]._x-5},${points[67]._y}
+               ${points[67]._x},${points[67]._y}
+             C ${points[67]._x},${points[67]._y+2}
+               ${points[65]._x},${points[65]._y+2}
+               ${points[65]._x},${points[65]._y}
+             C ${points[65]._x+5},${points[65]._y}
+               ${points[54]._x},${points[54]._y+5}
                ${points[54]._x},${points[54]._y}
-
-             C ${points[54]._x},${points[54]._y+5}
-               ${points[57]._x},${points[57]._y+5}
+            
+             C ${points[54]._x-5},${points[54]._y+5}
+               ${points[57]._x+20},${points[57]._y+5}
                ${points[57]._x},${points[57]._y}
 
-             C ${points[57]._x+30},${points[57]._y}
+             C ${points[57]._x-3},${points[57]._y+3}
+               ${points[58]._x},${points[58]._y}
+               ${points[58]._x},${points[58]._y}
+
+             C ${points[58]._x+45},${points[58]._y-5}
                ${points[8]._x+30}, ${chin}
                ${points[8]._x}, ${chin}
 
@@ -462,7 +471,6 @@ function start(){
             />
     </svg>`
 
-    // document.body.append(box)
     })
 }
 
