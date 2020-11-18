@@ -10,29 +10,33 @@ body{
 }
 .container{
     position: relative;
-    display: flex;
-}
-#myImg{
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: 500px;
+    height: 500px;
 }
 canvas{
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    border:1px solid #000;
-    margin-bottom: 400px;
+}
+.container{position:relative}
+.box1{position:absolute}
+.box2{position:absolute}
+
+.genderLine{
+    fill : none;
+    stroke:#f8f8f8;
+    stroke-width:1;
+    stroke-linecap:round;
 }
 #line{
     fill : none;
-    stroke:#000;
+    stroke:#f8f8f8;
     stroke-width:1;
     stroke-linecap:round;
     stroke-dasharray: 4000; /*이 값은 path의 길이와 동일합니다*/
     stroke-dashoffset: 0;
-    animation: dash 15s linear;
+    /*animation: dash 15s linear;*/
 }
 @keyframes dash {
     0% {
