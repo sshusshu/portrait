@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script defer src="assets/face-api.min.js"></script>
     <script defer src="assets/basic.js"></script>
 </head>
 <body>
-<input type="file" >
+<div class="alert hide">
+    <div class="text-container">
+        <p>얼굴을 못찾겠어요.</p>
+        <span>다른 사진 찾기</span>
+    </div>
+</div>
+<div class="preloader hide"></div>
+<input type="file" accept="image/gif, image/jpeg, image/png">
 <div class="container">
     <canvas></canvas>
     <div class="box1"></div>
