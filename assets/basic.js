@@ -8,7 +8,7 @@ const alertBox = document.querySelector('.alert');
 const otherPicBtn = document.querySelector('span');
 const box1 = document.querySelector('.box1');
 const box2 = document.querySelector('.box2');
-let detecting,points,gender,mh=0,mw=0;
+let detecting,points,gender,mh,mw;
 
 //functions
 function init(){
@@ -23,21 +23,22 @@ function hiding(target) {
     target.classList.remove('show');
 }
 async function resizedImg(faceapi){
-    const image = await faceapi.bufferToImage(input.files[0]);
-    const detect = await faceapi.detectSingleFace(image).withFaceLandmarks();
-    const point = detect.landmarks.positions;
-    const arrX =point.map(a=>a._x);
-    const arrY =point.map(a=>a._y);
-    const sx = Math.min(...arrX)-20;
-    const sy = Math.min(...arrY)-20;
-    const ex = Math.max(...arrX)+20;
-    const ey = Math.max(...arrY)+20;
-    mw = 350;
-    mh = (mw*(ey-sy))/(ex-sx);
-    canvas.width = mw;
-    canvas.height = mh;
-    canvas.style.opacity = '1'
-    ctx.drawImage(image,sx,sy,ex-sx,ey-sy,0,0,mw,mh);
+
+        const image = await faceapi.bufferToImage(input.files[0]);
+        const detect = await faceapi.detectSingleFace(image).withFaceLandmarks();
+        const point = detect.landmarks.positions;
+        const arrX =point.map(a=>a._x);
+        const arrY =point.map(a=>a._y);
+        const sx = Math.min(...arrX)-20;
+        const sy = Math.min(...arrY)-20;
+        const ex = Math.max(...arrX)+20;
+        const ey = Math.max(...arrY)+20;
+        mw = 350;
+        mh = (mw*(ey-sy))/(ex-sx);
+        canvas.width = mw;
+        canvas.height = mh;
+        canvas.style.opacity = '1'
+        ctx.drawImage(image,sx,sy,ex-sx,ey-sy,0,0,mw,mh);
 }
 async function landmarks(faceapi){
     detecting = await faceapi
@@ -439,25 +440,28 @@ Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromUri("./models")
 ]).then(start)
 
-
 function start(){
     input.addEventListener('change', async function(){
         showing(preloader);
-        await resizedImg(faceapi);
-        await landmarks(faceapi);
-        hiding(preloader)
-        if(!detecting){
-            showing(alertBox);
-            otherPicBtn.addEventListener('click', ()=> hiding(alertBox));
-            init();
+        try{
+            await resizedImg(faceapi);
+            await landmarks(faceapi);
+        }catch(e){
+            hiding(preloader);
+            withOutFace();
             return
         }
-        drawingCvs(points)
+        hiding(preloader);
+        drawingCvs(points);
         drawingFace(points,mw,mh);
-       // drawingPlant(gender);
+        drawingPlant(gender,mw,mh);
     })
 }
 
 
-
+function withOutFace(){
+        showing(alertBox);
+        otherPicBtn.addEventListener('click', ()=> hiding(alertBox));
+        init();
+}
 
