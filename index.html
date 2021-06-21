@@ -2,24 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon/apple-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+
+    <meta name="apple-mobile-web-app-title" content="Lexus Official Website">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="msapplication-TileImage" content="/favicon/apple-icon.png">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+
+    <title>The Drawing by Sshu</title>
+    <meta name="description" content="automatic face line portrait">
+    <meta name="keywords" content="line,portrait,drawing,face,faceapi">
+    <meta name="author" content="sshusshu">
+    <link rel="image_src" href="https://lexus.co.kr/source/sitemap/logo_share_A_27.jpg">
+
+    <meta property="og:site_name" content="The drawing by Sshu">
+    <meta property="og:title" content="The drawing">
+    <meta property="og:description" content="automatic face line portrait">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:url" content="https://lexus.co.kr/about-lexus/">
+    <meta property="og:image" content="https://lexus.co.kr/source/sitemap/logo_share_B_27.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="The drawing">
+    <meta name="twitter:description" content="automatic face line portrait">
+    <meta name="twitter:url" content="https://lexus.co.kr/about-lexus/">
+    <meta name="twitter:image" content="https://lexus.co.kr/source/sitemap/logo_share_A_27.jpg">
+
     <link rel="stylesheet" href="css/style.css">
-    <script defer src="assets/face-api.min.js"></script>
-    <script defer src="assets/basic.js"></script>
+    <script defer src="js/face-api.min.js"></script>
+    <script defer type="module" src="js/basic.js"></script>
 </head>
 <body>
-<div class="alert hide">
-    <div class="text-container">
-        <p>얼굴을 못찾겠어요.</p>
-        <span>다른 사진 찾기</span>
+<main>
+    <section class="alert hide">
+        <div class="text-container">
+            <p>얼굴을 못찾겠어요!</p>
+            <button class="btn-other">다른 사진 찾기</button>
+        </div>
+    </section>
+    <section class="preloader hide"></section>
+    <section class="container">
+        <canvas></canvas>
+        <div class="drawing-container"></div>
+    </section>
+    <div class="file-box">
+        <input class="upload-name" value="파일선택" disabled="disabled">
+        <label for="ex_file" class="primary">Upload</label>
+        <input type="file" id="ex_file" class="upload-hidden">
     </div>
-</div>
-<div class="preloader hide"></div>
-<input type="file" accept="image/gif, image/jpeg, image/png ,image/webp">
-<div class="container">
-    <canvas></canvas>
-    <div class="box1"></div>
-    <div class="box2"></div>
-</div>
+</main>
+
+
+
+
 </body>
 </html>
