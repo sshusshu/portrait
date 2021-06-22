@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+    <defs>
+        <style>.a{fill:rgba(255,255,255,0);}.b{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:4px;}</style>
+    </defs>
+    <g transform="translate(-352 -450)">
+        <rect class="a" width="22" height="22" transform="translate(352 450)"/>
+        <g transform="translate(355 454)">
+            <g transform="translate(-0.001 -0.001)">
+                <path class="b" d="M4195.55,6071.343v-15h-15" transform="translate(-4180.55 -6056.343)"/>
+                <line class="b" x1="14.871" y2="14.871" transform="translate(0.128 0)"/>
+            </g>
+        </g>
+    </g>
+</svg>

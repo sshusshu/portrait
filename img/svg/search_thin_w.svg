@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32.561" height="32.561" viewBox="0 0 32.561 32.561">
+    <defs>
+        <style>.a{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:3px;}</style>
+    </defs>
+    <g transform="translate(1.5 1.5)">
+        <g transform="translate(0)">
+            <ellipse class="a" cx="12.923" cy="12.923" rx="12.923" ry="12.923"/>
+            <line class="a" x2="8.309" y2="8.309" transform="translate(21.691 21.691)"/>
+        </g>
+    </g>
+</svg>
