@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+#footer {
+    @include common-convert-device(padding-top, 24);
+    font-family: $fonts-face-custom-bold-global;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    @at-root .mobile &{
+        a{
+            letter-spacing: -0.06em;
+            word-spacing: -0.05em;
+        }
+    }
+    color: #888888;
+
+    a {
+        color: #888888;
+        text-decoration: underline;
+    }
+
+    .logo {
+        display: block;
+        vertical-align: bottom;
+        background-image: url("../img/renewal/logo_samsung_foot.png");
+        @include hdpi() {
+            background-image: url("../img/renewal/logo_samsung_foot@x2.png");
+        }
+        @include bg-attr(N, 0 0, 100% auto);
+        text-decoration: none;
+    }
+
+    .info{
+
+    }
+
+    .kr {
+        font-family: $fonts-face-custom-regular-kr;
+        font-weight: normal;
+        letter-spacing: -0.08em;
+        @at-root .mobile &{
+            a{
+                word-spacing: 0;
+                letter-spacing: -0.08em;
+            }
+        }
+
+    }
+}
+
+@include break-point($mobile) {
+    .footer_wrap {
+
+    }
+    #footer {
+        padding-left: $rl-margin-mo;
+        padding-bottom: 4%;
+        .logo {
+            @include convert-device(width, 133);
+            @include convert-device(height, 21);
+        }
+        .more {
+            display: none;
+        }
+        .copyright {
+            display: block;
+            @include convert-device(margin-top, 24);
+            @include font-device('', 24);
+        }
+        .info {
+            display: block;
+            @include convert-device(margin-top, 22);
+            @include font-device('', 22);
+        }
+    }
+
+    body {
+        &.onOpenSearch {
+            .footer_wrap {
+                visibility: hidden;
+            }
+        }
+        &.onOpenMenu {
+            .footer_wrap{
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+@include break-point($tablet_pc) {
+    .footer_wrap {
+        position: relative;
+        width: 100%;
+        @include common-convert-device(height, 61);
+        background-color: #fff;
+
+        #footer {
+
+            padding: 0 $rl-margin;
+            @include common-convert-device(padding-top, 24);
+            @include font-device($fonts-face-custom-bold-global, 14, 14);
+            .logo {
+                display: inline-block;
+                @include common-convert-device(width, 91);
+                @include common-convert-device(height, 14);
+                @include common-convert-device(margin-right, 14);
+                margin-bottom: 0;
+            }
+            .copyright {
+                @include font-device('', 14);
+            }
+            .info{
+                @include font-device('', 14);
+            }
+            .kr {
+                @include font-device('', 14);
+            }
+        }
+    }
+}

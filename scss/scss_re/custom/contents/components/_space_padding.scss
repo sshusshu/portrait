@@ -1,0 +1,159 @@
+@charset "utf-8";
+/*
+여백 가이드
+web | mobile
+24 | 30
+30 | 40
+60 | 60
+100 | 100
+150 | 150
+200 | 200
+300 | 300
+400 | 400
+ */
+
+/* 여백 클래스 */
+@include break-point($tablet-pc) {
+    .space-pt-50 {
+        @include common-convert-device(padding-top, 36);
+        &.no-calc {@include common-convert-device(padding-top, 50);}
+    }
+    .space-pt-80 {
+        @include common-convert-device(padding-top, 66);
+        &.no-calc {@include common-convert-device(padding-top, 80);}
+    }
+
+    .space-pt-24 {
+        @include common-convert-device(padding-top, 10);
+        &.no-calc {@include common-convert-device(padding-top, 24);}
+    }
+    .space-pt-30 {
+        @include common-convert-device(padding-top, 20);
+        &.no-calc {@include common-convert-device(padding-top, 30);}
+    }
+    .space-pt-40 {
+        @include common-convert-device(padding-top, 30);
+        &.no-calc {@include common-convert-device(padding-top, 40);}
+    }
+    .space-pt-60 {
+        @include common-convert-device(padding-top, 46);
+        &.no-calc {@include common-convert-device(padding-top, 60);}
+    }
+    .space-pt-100 {
+        @include common-convert-device(padding-top, 86);
+        &.no-calc {@include common-convert-device(padding-top, 100);}
+    }
+    .space-pt-150 {
+        @include common-convert-device(padding-top, 136);
+        &.no-calc {@include common-convert-device(padding-top, 150);}
+    }
+    .space-pt-200 {
+        @include common-convert-device(padding-top, 186);
+        &.no-calc {@include common-convert-device(padding-top, 200);}
+    }
+    .space-pt-300 {
+        @include common-convert-device(padding-top, 286);
+        &.no-calc {@include common-convert-device(padding-top, 300);}
+    }
+    .space-pt-400 {
+        @include common-convert-device(padding-top, 386);
+        &.no-calc {@include common-convert-device(padding-top, 400);}
+    }
+}
+
+@include break-point($mobile) {
+    .space-pt-50, .space-pt-50-mob-only {
+        @include vw-convert-mo(padding-top, 30);
+        &.no-calc {@include vw-convert-mo(padding-top, 50);}
+    }
+    .space-pt-80, .space-pt-80-mob-only {
+        @include vw-convert-mo(padding-top, 60);
+        &.no-calc {@include vw-convert-mo(padding-top, 80);}
+    }
+    .space-pt-24, .space-pt-24-mob-only {
+        @include vw-convert-mo(padding-top, 10);
+        &.no-calc {@include vw-convert-mo(padding-top, 30);}
+    }
+    .space-pt-30, .space-pt-30-mob-only {
+        @include vw-convert-mo(padding-top, 20);
+        &.no-calc {@include vw-convert-mo(padding-top, 40);}
+    }
+    .space-pt-40, .space-pt-40-mob-only {
+        @include vw-convert-mo(padding-top, 30);
+        &.no-calc {@include vw-convert-mo(padding-top, 40);}
+    }
+    .space-pt-60, .space-pt-60-mob-only {
+        @include vw-convert-mo(padding-top, 50);
+        &.no-calc {@include vw-convert-mo(padding-top, 60);}
+    }
+    .space-pt-100, .space-pt-100-mob-only {
+        @include vw-convert-mo(padding-top, 80);
+        &.no-calc {@include vw-convert-mo(padding-top, 80);}
+    }
+    .space-pt-150, .space-pt-150-mob-only {
+        @include vw-convert-mo(padding-top, 130);
+        &.no-calc {@include vw-convert-mo(padding-top, 150);}
+    }
+    .space-pt-200, .space-pt-200-mob-only {
+        @include vw-convert-mo(padding-top, 180);
+        &.no-calc {@include vw-convert-mo(padding-top, 200);}
+    }
+    .space-pt-300, .space-pt-300-mob-only
+    {@include vw-convert-mo(padding-top, 280);
+        &.no-calc {@include vw-convert-mo(padding-top, 300);}
+    }
+    .space-pt-400, .space-pt-400-mob-only {
+        @include vw-convert-mo(padding-top, 380);
+        &.no-calc {@include vw-convert-mo(padding-top, 400);}
+    }
+
+
+    // 추가정의
+    .space-pt-0-mob-only {
+        padding-top:0;
+    }
+    .space-pt-50-mob-only {
+        @include vw-convert-mo(padding-top, 30);
+        &.no-calc {@include vw-convert-mo(padding-top, 50);}
+    }
+    .space-pt-80-mob-only {
+        @include vw-convert-mo(padding-top, 60);
+        &.no-calc {@include vw-convert-mo(padding-top, 80);}
+    }
+    .space-pt-24-mob-only {
+        @include vw-convert-mo(padding-top, 10);
+        &.no-calc {@include vw-convert-mo(padding-top, 30);}
+    }
+    .space-pt-30-mob-only {
+        @include vw-convert-mo(padding-top, 20);
+        &.no-calc {@include vw-convert-mo(padding-top, 40);}
+    }
+    .space-pt-40-mob-only {
+        @include vw-convert-mo(padding-top, 30);
+        &.no-calc {@include vw-convert-mo(padding-top, 40);}
+    }
+    .space-pt-60-mob-only {
+        @include vw-convert-mo(padding-top, 50);
+        &.no-calc {@include vw-convert-mo(padding-top, 60);}
+    }
+    .space-pt-100-mob-only {
+        @include vw-convert-mo(padding-top, 80);
+        &.no-calc {@include vw-convert-mo(padding-top, 80);}
+    }
+    .space-pt-150-mob-only {
+        @include vw-convert-mo(padding-top, 130);
+        &.no-calc {@include vw-convert-mo(padding-top, 150);}
+    }
+    .space-pt-200-mob-only {
+        @include vw-convert-mo(padding-top, 180);
+        &.no-calc {@include vw-convert-mo(padding-top, 200);}
+    }
+    .space-pt-300-mob-only
+    {@include vw-convert-mo(padding-top, 280);
+        &.no-calc {@include vw-convert-mo(padding-top, 300);}
+    }
+    .space-pt-400-mob-only {
+        @include vw-convert-mo(padding-top, 380);
+        &.no-calc {@include vw-convert-mo(padding-top, 400);}
+    }
+}

@@ -1,0 +1,366 @@
+@charset "utf-8";
+
+.related-stories-wrap{
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+
+    .dline{
+        &:before{
+            display: block;
+            content:'';
+            //max-width:1984px;
+            height:1px;
+            background: #666;
+
+            @include hdpi(1.3){
+                height:0.667px;
+            }
+
+            @include hdpi(2){
+                height:1px;
+            }
+        }
+    }
+
+    .title{
+        text-align: center;
+        h3{
+            font-family: $fonts-face-custom-bold-global;
+            letter-spacing: 0.015em;
+            color:#000;
+            text-align: center;
+            font-weight: 100;
+        }
+    }
+
+
+    // list-module
+    .component-list {
+        position: relative;
+        font-size: 0;
+
+        li {
+            display: inline-block;
+            box-sizing: content-box;
+            vertical-align: top;
+
+            br {
+                display: none;
+            }
+
+            dl {
+                position: relative;
+                padding-top: 56.25%;
+                span {
+                    display: block;
+                }
+            }
+
+            dt,dd{
+                margin:0;
+                padding:0;
+            }
+
+            dt.title {
+                //font-family: $fonts-face-banner-custom-medium-global;
+                font-family:'samsungSharpSansMedium';
+                letter-spacing: -0.015em;
+                color: #000;
+                text-align: left;
+            }
+
+            dd.desc {
+                font-family: $fonts-face-custom-regular-global;
+                letter-spacing: -0.015em;
+                color: #000;
+                text-align: left;
+            }
+
+            dd.date {
+                font-family: $fonts-face-custom-regular-global;
+                color: #666;
+                text-align: left;
+            }
+
+            dd.img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding-top: inherit;
+                //background-color:#000;
+                overflow: hidden;
+
+                a {
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    padding-top: inherit;
+                    top: 0;
+                }
+                .item {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    overflow: hidden;
+
+                    figure.mod-covered-bg {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-position: 50% 50%;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+
+                        margin: 0;
+                    }
+                }
+
+                .canvas-box {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        .text-area {
+            .nocontent_msg {
+                margin-top: 150px;
+                text-align: center;
+                @include font-device($fonts-face-custom-regular-global, 24);
+                strong {
+                    @include font-device($fonts-face-custom-bold-global, 24);
+                }
+            }
+        }
+        &.motion {
+            li{
+                dt.title {
+                    @include opacity(0);
+                }
+
+                dd.desc {
+                    @include opacity(0);
+                    @include transform(translateY(100%));
+                }
+
+                dd.date {
+                    @include opacity(0);
+                    @include transform(translateY(100%));
+                }
+                dd.img {
+                    //@include opacity(0);
+                    a {
+                        //@include transform(translateY(200%) scale(0.8, 0.8));
+                    }
+                    .item {
+                        figure {
+                            @include opacity(0);
+                            @include css-transition(opacity, 1);
+                            @include transform(scale(1.2, 1.2));
+                            @include transform-origin(50%, 100%);
+
+                            &.complete {
+                                @include opacity(1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.onTrans {
+            li{
+                dt.title {
+                    @include css-transition(opacity, 0.5, 0.5);
+                    @include opacity(1);
+                }
+                dd.desc {
+                    @include transform-css-transition(0.5, 0.5, $ease-out-cubic, opacity 0.5s 0.5s);
+                    @include opacity(1);
+                    @include transform(translateY(0%));
+                }
+                dd.date {
+                    @include transform-css-transition(0.4, 0.6, $ease-out-cubic, opacity 0.4s 0.6s);
+                    @include opacity(1);
+                    @include transform(translateY(0%));
+                }
+                dd.img {
+                    //@include opacity(1);
+                    a {
+                        //@include transform-css-transition(1.4, 0, $ease-out-cubic, opacity 1.4s);
+                        //@include transform(translateY(0%) scale(1, 1));
+                        .item {
+                            //@include transform(translateY(0%));
+                            //@include transform-transition(1, 0, $ease-out-cubic);
+                            figure {
+                                @include transform-css-transition(1.4, 0, $ease-out-cubic, opacity 1.4s);
+                                @include transform(scale(1, 1));
+                                @include opacity(1);
+                            }
+                        }
+
+                        &:hover {
+                            .item {
+                                figure {
+                                    @include transform(scale(1.1, 1.1));
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        //한국 버전
+        &.version-kr{
+            li{
+                dt.title {
+                    //font-family: $fonts-face-banner-custom-medium;
+                    font-family:'samsungSharpSansMedium', 'samsungonekorean600';
+                }
+                dd.desc {
+                    font-family: $fonts-face-custom-regular;
+                }
+            }
+
+            .text-area {
+                .nocontent_msg {
+                    @include font-device($fonts-face-custom-regular, 24);
+                    strong {
+                        @include font-device($fonts-face-custom-bold, 24);
+                    }
+                }
+            }
+        }
+    }
+
+
+    @include break-point($tablet-pc){
+        .dline{
+            @include common-convert-device(padding-top,180);
+            @include common-convert-device(padding-bottom,80);
+            margin: 0 $rl-margin;
+        }
+
+        .title{
+            h3{
+                @include font-device('',24, 24);
+            }
+        }
+
+        .component-list{
+            @include common-convert-device(padding-top, 50);
+
+            li {
+                width: 30%;
+                @include per-convert-pc(margin, 0 16);
+                @include common-convert-device(padding-bottom, 80);
+
+                &:nth-child(1) {
+                    margin-left: $rl-margin;
+                }
+                &:nth-child(3) {
+                    margin-right: $rl-margin;
+                }
+
+                dl {
+
+                }
+
+                dt.title {
+                    @include convert-device(padding, 0 32);
+                    @include common-convert-device(padding-top, 26);
+                    @include font-device('', 30, 36);
+                }
+
+                dd.desc {
+                    @include convert-device(padding, 0 32);
+                    @include common-convert-device(padding-top, 14);
+                    @include font-device('', 18, 22);
+                }
+
+                dd.date {
+                    @include convert-device(padding, 0 32);
+                    @include common-convert-device(padding-top, 18);
+                    @include font-device('', 12, 12);
+                }
+
+            }
+        }
+    }
+
+    @include break-point($pc-4k) {
+        .component-list {
+            li {
+                dl {
+                    padding-top: 432px;
+                }
+            }
+        }
+    }
+
+    @include break-point($mobile){
+        .dline{
+            margin:0 $rl-margin-mo;
+            @include vw-convert-mo(padding,300 0 100);
+        }
+
+        .title{
+            h3{
+                @include vw-font-mo('',42);
+            }
+        }
+
+        .component-list{
+            @include vw-convert-mo(padding-top, 60);
+
+            li {
+                display: block;
+                width: 92%;
+                margin: 0 $rl-margin-mo;
+                @include vw-convert-mo(padding-bottom, 196);
+
+                dt.title {
+                    @include vw-convert-mo(padding, 52 30 0);
+                    @include vw-font-mo('', 56, 64);
+                }
+                dd.desc {
+                    @include vw-convert-mo(padding, 20 30 0);
+                    @include vw-font-mo('', 36, 48);
+                }
+                dd.date {
+                    @include vw-convert-mo(padding, 20 30 0);
+                    @include vw-font-mo('', 28);
+                }
+            }
+
+            .text-area{
+                position: fixed;
+                top: 61px;
+                background-color: #FFF;
+                width:100%;
+                height:100vh;
+                .nocontent_msg{
+                    width:80%;
+                    margin:0 auto;
+                    padding:40% 0;
+                    text-align:center;
+                    @include vw-font-mo($fonts-face-custom-regular, 32);
+                    strong{
+                        @include vw-font-mo($fonts-face-custom-bold, 32);
+                    }
+                }
+            }
+        }
+    }
+
+}

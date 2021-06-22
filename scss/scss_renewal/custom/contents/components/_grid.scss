@@ -1,0 +1,134 @@
+@charset "utf-8";
+// 그리드 시스템
+
+.is-full {width: 100%;}
+.is-half {width: 50%;}
+
+/* 컬럼 스타일 */
+.cols-container {
+    font-size: 0;
+
+    &.no-gutters {
+        div[class^="cols-"] {
+            padding-left:0;
+            padding-right:0;
+        }
+    }
+}
+
+div[class^="cols-"] {
+    &.no-gutters {
+        padding-left:0;
+        padding-right:0;
+    }
+}
+
+@include break-point($pc) {
+    .ml-1-col {margin-left: 10%;}
+    .ml-2-col {margin-left: 20%;}
+    .ml-3-col {margin-left: 30%;}
+    .ml-4-col {margin-left: 40%;}
+    .ml-5-col {margin-left: 50%;}
+    .ml-6-col {margin-left: 60%;}
+    .ml-7-col {margin-left: 70%;}
+    .mr-1-col {margin-right: 10%;}
+    .mr-2-col {margin-right: 20%;}
+    .mr-3-col {margin-right: 30%;}
+    .mr-4-col {margin-right: 40%;}
+    .mr-5-col {margin-right: 50%;}
+    .pl-1-col {padding-left: 8.75%;}
+    .pr-1-col {padding-right: 8.75%;}
+
+    .cols-1 {display: inline-block; width: 10%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-2 {display: inline-block; width: 20%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-3 {
+        display: inline-block; width: 30%; padding: 0 1.25vw; vertical-align: top;
+        .pl-1-col {padding-left: percentage(192/528);}
+        .pl-2-col {padding-left: percentage(384/528);}
+        .pr-1-col {padding-right: percentage(192/528);}
+        .pr-2-col {padding-right: percentage(384/528);}
+    }
+    .cols-4 {
+        display: inline-block; width: 40%; padding: 0 1.25vw; vertical-align: top;
+        .pl-1-col {padding-left: percentage(192/720);}
+        .pl-2-col {padding-left: percentage(384/720);}
+        .pr-1-col {padding-right: percentage(192/720);}
+        .pr-2-col {padding-right: percentage(384/720);}
+    }
+    .cols-5 {
+        display: inline-block; width: 50%; padding: 0 1.25vw; vertical-align: top;
+        .pl-1-col {padding-left: percentage(192/912);}
+        .pl-2-col {padding-left: percentage(384/912);}
+        .pr-1-col {padding-right: percentage(192/912);}
+        .pr-2-col {padding-right: percentage(384/912);}
+    }
+    .cols-6 {
+        display: inline-block; width: 60%; padding: 0 1.25vw; vertical-align: top;
+        .pl-1-col {padding-left: percentage(192/1104);}
+        .pl-2-col {padding-left: percentage(384/1104);}
+        .pr-1-col {padding-right: percentage(192/1104);}
+        .pr-2-col {padding-right: percentage(384/1104);}
+    }
+    .cols-7 {display: inline-block; width: 70%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-8 {display: inline-block; width: 80%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-9 {display: inline-block; width: 90%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-10 {display: inline-block; width: 100%; padding:0 0.25vw; vertical-align: top;}
+}
+
+@include break-point($tablet) {
+    .ml-1-col {margin-left: 10%;}
+    .ml-2-col {margin-left: 20%;}
+    .ml-3-col {margin-left: 30%;}
+    .ml-4-col {margin-left: 40%;}
+    .ml-5-col {margin-left: 50%;}
+    .ml-6-col {margin-left: 60%;}
+    .ml-7-col {margin-left: 70%;}
+    .mr-1-col {margin-right: 10%;}
+    .mr-2-col {margin-right: 20%;}
+    .mr-3-col {margin-right: 30%;}
+    .pl-1-col {padding-left: 0;}
+    .pl-2-col {padding-left: 0;}
+    .pr-1-col {padding-right: 0;}
+    .pr-2-col {padding-right: 0;}
+
+    .cols-1 {display: inline-block; width: 10%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-2 {display: inline-block; width: 20%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-3 {display: inline-block; width: 30%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-4 {display: inline-block; width: 40%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-5 {display: inline-block; width: 50%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-6 {display: inline-block; width: 60%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-7 {display: inline-block; width: 70%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-8 {display: inline-block; width: 80%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-9 {display: inline-block; width: 90%; padding: 0 1.25vw; vertical-align: top;}
+    .cols-10 {display: inline-block; width: 100%; padding:0 0.25vw; vertical-align: top;}
+}
+
+@include break-point($mobile) {
+    .ml-1-col {margin-left: 0;}
+    .ml-2-col {margin-left: 0;}
+    .ml-3-col {margin-left: 0;}
+    .ml-4-col {margin-left: 0;}
+    .ml-5-col {margin-left: 0;}
+    .ml-6-col {margin-left: 0;}
+    .ml-7-col {margin-left: 0;}
+    .mr-1-col {margin-right: 0;}
+    .mr-2-col {margin-right: 0;}
+    .mr-3-col {margin-right: 0;}
+    .mr-4-col {margin-right: 0;}
+    .mr-5-col {margin-right: 0;}
+    .pl-1-col {padding-left: 0;}
+    .pl-2-col {padding-left: 0;}
+    .pr-1-col {padding-right: 0;}
+    .pr-2-col {padding-right: 0;}
+
+    .cols-1 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-2 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-3 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-4 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-5 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-6 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-7 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-8 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-9 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+    .cols-10 {display: block; width: 100%; padding: 0 $rl-margin-mo*2;}
+}

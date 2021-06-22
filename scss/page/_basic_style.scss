@@ -1,3 +1,4 @@
+
 body{
   margin: 0;
   padding: 0;
@@ -13,7 +14,6 @@ body{
     bottom: 0;
     &.preloader{
       z-index: 10;
-      background: #555;
     }
     &.alert{
       z-index: 20;
@@ -44,6 +44,29 @@ body{
     }
   }
 
+  .preloader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loading-icon{
+      position:relative;
+      width: 150px;
+      height: 150px;
+      span{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform:translate3d(-50%,-50%,0);
+      }
+      svg{
+        #loading-line{
+
+        };
+      }
+    }
+
+  }
+
   .container{
     position: relative;
     width: 500px;
@@ -54,12 +77,22 @@ body{
       left: 0;
       z-index: 1;
     }
-    .drawing-container{position:absolute}
-    .genderLine{
-      fill : none;
-      stroke:#E9E9E9;
-      stroke-width:1;
-      stroke-linecap:round;
+    .drawing-container{
+      position:absolute;
+      .download:hover{
+
+        box-shadow:0 0 20px #999;
+        transition:box-shadow 0.5s ease-in-out;
+      }
+    }
+    button{
+      background: #000;
+      border-radius: 5px;
+      width: 150px;
+      height: 40px;
+      position: absolute;
+      z-index: 2;
+      color:#fff;
     }
     #line{
       fill : none;

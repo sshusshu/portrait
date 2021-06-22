@@ -1,0 +1,159 @@
+@charset "utf-8";
+/*
+여백 가이드
+web | mobile
+24 | 30
+30 | 40
+60 | 60
+100 | 100
+150 | 150
+200 | 200
+300 | 300
+400 | 400
+ */
+
+/* 여백 클래스 */
+@include break-point($tablet-pc) {
+    .space-mt-50 {
+        @include common-convert-device(margin-top, 36);
+        &.no-calc {@include common-convert-device(margin-top, 50);}
+    }
+    .space-mt-80 {
+        @include common-convert-device(margin-top, 66);
+        &.no-calc {@include common-convert-device(margin-top, 80);}
+    }
+
+    .space-mt-24 {
+        @include common-convert-device(margin-top, 10);
+        &.no-calc {@include common-convert-device(margin-top, 24);}
+    }
+    .space-mt-30 {
+        @include common-convert-device(margin-top, 20);
+        &.no-calc {@include common-convert-device(margin-top, 30);}
+    }
+    .space-mt-40 {
+        @include common-convert-device(margin-top, 30);
+        &.no-calc {@include common-convert-device(margin-top, 40);}
+    }
+    .space-mt-60 {
+        @include common-convert-device(margin-top, 46);
+        &.no-calc {@include common-convert-device(margin-top, 60);}
+    }
+    .space-mt-100 {
+        @include common-convert-device(margin-top, 86);
+        &.no-calc {@include common-convert-device(margin-top, 100);}
+    }
+    .space-mt-150 {
+        @include common-convert-device(margin-top, 136);
+        &.no-calc {@include common-convert-device(margin-top, 150);}
+    }
+    .space-mt-200 {
+        @include common-convert-device(margin-top, 186);
+        &.no-calc {@include common-convert-device(margin-top, 200);}
+    }
+    .space-mt-300 {
+        @include common-convert-device(margin-top, 286);
+        &.no-calc {@include common-convert-device(margin-top, 300);}
+    }
+    .space-mt-400 {
+        @include common-convert-device(margin-top, 386);
+        &.no-calc {@include common-convert-device(margin-top, 400);}
+    }
+}
+
+@include break-point($mobile) {
+    .space-mt-50, .space-mt-50-mob-only {
+        @include vw-convert-mo(margin-top, 30);
+        &.no-calc {@include vw-convert-mo(margin-top, 50);}
+    }
+    .space-mt-80, .space-mt-80-mob-only {
+        @include vw-convert-mo(margin-top, 60);
+        &.no-calc {@include vw-convert-mo(margin-top, 80);}
+    }
+    .space-mt-24, .space-mt-24-mob-only {
+        @include vw-convert-mo(margin-top, 10);
+        &.no-calc {@include vw-convert-mo(margin-top, 30);}
+    }
+    .space-mt-30, .space-mt-30-mob-only {
+        @include vw-convert-mo(margin-top, 20);
+        &.no-calc {@include vw-convert-mo(margin-top, 40);}
+    }
+    .space-mt-40, .space-mt-40-mob-only {
+        @include vw-convert-mo(margin-top, 30);
+        &.no-calc {@include vw-convert-mo(margin-top, 40);}
+    }
+    .space-mt-60, .space-mt-60-mob-only {
+        @include vw-convert-mo(margin-top, 50);
+        &.no-calc {@include vw-convert-mo(margin-top, 60);}
+    }
+    .space-mt-100, .space-mt-100-mob-only {
+        @include vw-convert-mo(margin-top, 80);
+        &.no-calc {@include vw-convert-mo(margin-top, 80);}
+    }
+    .space-mt-150, .space-mt-150-mob-only {
+        @include vw-convert-mo(margin-top, 130);
+        &.no-calc {@include vw-convert-mo(margin-top, 150);}
+    }
+    .space-mt-200, .space-mt-200-mob-only {
+        @include vw-convert-mo(margin-top, 180);
+        &.no-calc {@include vw-convert-mo(margin-top, 200);}
+    }
+    .space-mt-300, .space-mt-300-mob-only
+    {@include vw-convert-mo(margin-top, 280);
+        &.no-calc {@include vw-convert-mo(margin-top, 300);}
+    }
+    .space-mt-400, .space-mt-400-mob-only {
+        @include vw-convert-mo(margin-top, 380);
+        &.no-calc {@include vw-convert-mo(margin-top, 400);}
+    }
+
+
+    // 추가정의
+    .space-mt-0-mob-only {
+        margin-top:0;
+    }
+    .space-mt-50-mob-only {
+        @include vw-convert-mo(margin-top, 30);
+        &.no-calc {@include vw-convert-mo(margin-top, 50);}
+    }
+    .space-mt-80-mob-only {
+        @include vw-convert-mo(margin-top, 60);
+        &.no-calc {@include vw-convert-mo(margin-top, 80);}
+    }
+    .space-mt-24-mob-only {
+        @include vw-convert-mo(margin-top, 10);
+        &.no-calc {@include vw-convert-mo(margin-top, 30);}
+    }
+    .space-mt-30-mob-only {
+        @include vw-convert-mo(margin-top, 20);
+        &.no-calc {@include vw-convert-mo(margin-top, 40);}
+    }
+    .space-mt-40-mob-only {
+        @include vw-convert-mo(margin-top, 30);
+        &.no-calc {@include vw-convert-mo(margin-top, 40);}
+    }
+    .space-mt-60-mob-only {
+        @include vw-convert-mo(margin-top, 50);
+        &.no-calc {@include vw-convert-mo(margin-top, 60);}
+    }
+    .space-mt-100-mob-only {
+        @include vw-convert-mo(margin-top, 80);
+        &.no-calc {@include vw-convert-mo(margin-top, 80);}
+    }
+    .space-mt-150-mob-only {
+        @include vw-convert-mo(margin-top, 130);
+        &.no-calc {@include vw-convert-mo(margin-top, 150);}
+    }
+    .space-mt-200-mob-only {
+        @include vw-convert-mo(margin-top, 180);
+        &.no-calc {@include vw-convert-mo(margin-top, 200);}
+    }
+    .space-mt-300-mob-only
+    {@include vw-convert-mo(margin-top, 280);
+        &.no-calc {@include vw-convert-mo(margin-top, 300);}
+    }
+    .space-mt-400-mob-only {
+        @include vw-convert-mo(margin-top, 380);
+        &.no-calc {@include vw-convert-mo(margin-top, 400);}
+    }
+}

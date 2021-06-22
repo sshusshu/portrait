@@ -1,0 +1,304 @@
+@charset "utf-8";
+// 이미지형 , 텍스트형 컨테이너 정의
+
+/* 이미지 슬라이더 스타일 */
+.slider-container {
+    position: relative;
+    .bx-wrapper {position: absolute; top:0; left: 0; width: 100%; height: 100%; box-shadow: none; border: none;}
+    .bx-viewport {height: 100%!important;}
+    .slider {height: 100%;}
+    .slider .img-box {width: 100%; height: 100%;}
+    .none-click {pointer-events: none;}
+}
+
+/* 이미지 컨테이너 스타일 */
+.img-container {
+    position: relative;
+    width: 100%; height: 100%;
+    overflow:hidden;
+    .img-box {
+        position: absolute;
+        top:0; left: 0;
+        width: 100%; height: 100%;
+    }
+}
+
+/* 이미지 텍스트 컨테이너 스타일 */
+.img-txt-container {
+    position: relative; overflow:hidden;
+    .img-txt-box {
+        position: absolute;
+        top:0; left: 0;
+        width: 100%; height: 100%;
+    }
+}
+
+/* 플로팅 이미지 스타일 */
+.img-float-right {
+    float: right;
+
+    @include break-point($mobile) {
+        float: none;
+    }
+}
+
+
+
+/* 이미지 롤링 */
+
+.img-rolling{
+    position: relative;
+    overflow: hidden;
+    li{
+        position:absolute;
+        top: 0; left: 0;
+        width:100%;height:100%;
+    }
+}
+
+/* 백그라운드 이미지를 가진 컨테이너 스타일 */
+.has-bg-con {
+    position: relative;
+    overflow: hidden;
+
+    .cols-container {
+        position: relative;
+        width: 100%; height: 100%;
+        z-index: 2;
+
+        div[class^="cols-"],
+        .is-full,
+        .is-half {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        &.vertical-mid-con {
+            .vertical-mid-txt {
+                position: relative;
+                height: auto;
+            }
+        }
+        &.vertical-bot-con {
+            .vertical-bot-txt {
+                position: relative;
+                //height: auto;
+            }
+        }
+    }
+
+    .img-container,
+    .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    @include break-point($tablet-pc) {
+        .cols-container {
+            .is-half {
+                //height:100%;
+            }
+        }
+    }
+    @include break-point($mobile) {
+        .cols-container {
+            .is-half {
+                position:relative;
+                width:100%;
+            }
+        }
+    }
+}
+
+/* 텍스트와 백그라운드 이미지를 가진 컬럼 스타일 */
+div[class^="cols-"] {
+    &.has-bg-con {
+        .img-container,
+        .video-container {
+            position:relative;
+        }
+
+        .txt-container {
+            position:absolute;
+            width:100%;
+            height:100%;
+            top:0; left:0;
+
+            @include break-point($pc) {padding: 0 1.25vw;}
+            @include break-point($tablet) {padding: 0 1.25vw;}
+            @include break-point($mobile) {padding: 0 $rl-margin-mo*2;}
+        }
+    }
+}
+
+/* 비디오 컨테이너 */
+.video-con {
+    .alt-txt-hide {
+        visibility: hidden;
+        text-indent: -9999px;
+        font-size: 0;
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    @include break-point($pc) {
+        position: relative;
+
+        .btn-play {
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%;
+            @include convert-device(width, 168);
+            @include convert-device(height, 168);
+            transform: translate(-50%, -50%);
+            border: none;
+            border-radius: 50%;
+            font-size: 3.5em;
+            background-color: rgba(255,255,255,.55);
+            color: rgba(255,255,255,.9);
+
+            &:before {
+                display: block;
+                position: absolute;
+                top: 50%; left: 55%;
+                border-style: solid;
+                @include convert-device(border-width, 33 0 33 50);
+                transform: translate(-50%, -50%);
+                border-color: transparent transparent transparent #fff;
+            }
+
+            &.type-black {
+                background-color: rgba(0,0,0,.4);
+                color: rgba(0,0,0,.9);
+            }
+        }
+    }
+
+    @include break-point($tablet) {
+        position: relative;
+
+        .btn-play {
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%;
+            @include convert-device(width, 168);
+            @include convert-device(height, 168);
+            transform: translate(-50%, -50%);
+            border: none;
+            border-radius: 50%;
+            font-size: 3.5em;
+            background-color: rgba(255,255,255,.55);
+            color: rgba(255,255,255,.9);
+
+            &:before {
+                display: block;
+                position: absolute;
+                top: 50%; left: 55%;
+                border-style: solid;
+                @include convert-device(border-width, 33 0 33 50);
+                transform: translate(-50%, -50%);
+                border-color: transparent transparent transparent #fff;
+            }
+
+            &.type-black {
+                background-color: rgba(0,0,0,.4);
+                color: rgba(0,0,0,.9);
+            }
+        }
+    }
+
+    @include break-point($mobile) {
+        position: relative;
+
+        .btn-play {
+            display: block;
+            position: absolute;
+            top: 50%; left: 50%;
+            @include vw-convert-mo(width, 84);
+            @include vw-convert-mo(height, 84);
+            transform: translate(-50%, -50%);
+            border: none;
+            border-radius: 50%;
+            font-size: 3.5em;
+            background-color: rgba(255,255,255,.55);
+            color: rgba(255,255,255,.9);
+
+            &:before {
+                display: block;
+                position: absolute;
+                top: 50%; left: 55%;
+                border-style: solid;
+                @include vw-convert-mo(border-width, 16.5 0 16.5 25);
+                transform: translate(-50%, -50%);
+                border-color: transparent transparent transparent #fff;
+            }
+
+            &.type-black {
+                background-color: rgba(0,0,0,.4);
+                color: rgba(0,0,0,.9);
+            }
+        }
+    }
+}
+
+.video-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+    background-color: #000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+    .btn-close {
+        position: absolute;
+        @include convert-device(top, 30);
+        @include convert-device(right, 30);
+        @include convert-device(width, 56);
+        @include convert-device(height, 56);
+        //background: url('../img/btn_close.png') no-repeat;
+        //background-size: 100% auto;
+        text-indent: -999em;
+        font-size: 0;
+        overflow: hidden;
+
+        &:before {
+            display: block;
+            content: '';
+            position: absolute;
+            top:50%; left: 50%;
+            @include convert-device(width, 78);
+            transform: rotate(45deg) translate(-50%, -50%);
+            transform-origin: top left;
+            height: 1px;
+            background: #fff;
+        }
+        &:after {
+            display: block;
+            content: '';
+            position: absolute;
+            top:50%; left: 50%;
+            @include convert-device(width, 78);
+            transform: rotate(-45deg) translate(-50%, -50%);
+            transform-origin: top left;
+            height: 1px;
+            background: #fff;
+        }
+    }
+}

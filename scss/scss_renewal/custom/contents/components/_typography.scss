@@ -1,0 +1,461 @@
+@charset "utf-8";
+// 타이포 그래피 컴포넌트
+
+// 디자인팀과 협의된 기본값
+// KV 타이틀 (txt-kv-tit) : Web - 70px/74px, Mobile - 70px/92px
+// 타이틀 (txt-tit) : Web - 48px/64px, Mobile - 56px/76px
+// 서브 타이틀 (txt-sub-tit) :  Web - 36px/48px, Mobile - 42px/54px
+// 본문 대 (txt-paragraph-big) :  Web - 24px/36px, Mobile - 36px/54px
+// 본문 소 (txt-paragraph-small) :  Web - 18px/30px, Mobile - 28px/52px
+// 디스클레이머 (txt-disclaimer) :  Web - 14px/20px, Mobile - 24px/44px
+
+
+// 타이포 컴포넌트 스타일 정의
+$typography-list-kr:( //kr
+    // 배열 규칙
+    // Key => 타이포그래피 클래스   pc,mobile의 value => font-type, font-size, line-height, letter-spacing
+    txt-kv-tit-sample:      (pc:(regular, 60, 74, -0.02), mobile:(regular, 70, 92, -0.02)),
+    txt-kv-tit-bold-sample: (pc:(bold, 60, 74, -0.02), mobile:(bold, 70, 92, -0.02)),
+    txt-disclaimer-sample:  (pc:(regular, 14, 20, -0.04), mobile:(regular, 24, 44, -0.04)),
+
+    //txt-kv-tit: (pc:(regular, 60, 74, -0.02), mobile:(regular, 70, 92, -0.02)),
+    //txt-kv-tit-bold: (pc:(bold, 60, 74, -0.02), mobile:(bold, 70, 92, -0.02)),
+    //txt-tit: (pc:(regular, 48, 64, -0.02), mobile:(regular, 56, 76, -0.02)),
+    //txt-tit-bold: (pc:(bold, 48, 64, -0.02), mobile:(bold, 56, 76, -0.02)),
+    //txt-sub-tit: (pc:(regular, 48, 64, -0.04), mobile:(regular, 56, 76, -0.04)),
+    //txt-sub-tit-bold: (pc:(bold, 48, 64, -0.04), mobile:(bold, 56, 76, -0.04)),
+    //txt-paragraph-big: (pc:(regular, 24, 36, -0.02), mobile:(regular, 36, 54, -0.02)),
+    //txt-paragraph-big-bold: (pc:(bold, 24, 36, -0.02), mobile:(bold, 36, 54, -0.02)),
+    //txt-paragraph-small: (pc:(regular, 18, 30, -0.02), mobile:(regular, 28, 52, -0.02)),
+);
+
+$typography-list-global:( //global
+    // 배열 규칙
+    // Key => 타이포그래피 클래스   value => font-type, font-size, line-height, letter-spacing
+    txt-kv-tit-sample:      (pc:(regular-g, 60, 74, -0.02), mobile:(regular-g, 70, 92, -0.02)),
+    txt-kv-tit-bold-sample: (pc:(bold-g, 60, 74, -0.02), mobile:(bold-g, 70, 92, -0.02)),
+    txt-disclaimer-sample:  (pc:(regular-g, 14, 20, -0.04), mobile:(regular-g, 24, 44, -0.04))
+);
+
+
+// 타이포 컴포넌트 제너레이터
+@mixin generator-for-typography($typo-list, $typo-value){
+    @include break-point($pc) {
+        //@debug $typo-value $break-point nth($typo-value, 1) nth($break-point, 1);
+        $generator-typo-value: nth($typo-value, 1);
+        .#{$typo-list}{
+            @include output-typography( nth($generator-typo-value,1), nth($generator-typo-value, 2), nth($generator-typo-value, 3), nth($generator-typo-value, 4), pc);
+        }
+    }
+
+    @include break-point($tablet) {
+        $generator-typo-value: nth($typo-value, 1);
+        .#{$typo-list}{
+            @include output-typography( nth($generator-typo-value,1), nth($generator-typo-value, 2), nth($generator-typo-value, 3), nth($generator-typo-value, 4), tablet);
+        }
+    }
+
+    @include break-point($mobile) {
+        $generator-typo-value: nth($typo-value, 2);
+        .#{$typo-list}{
+            @include output-typography( nth($generator-typo-value,1), nth($generator-typo-value, 2), nth($generator-typo-value, 3), nth($generator-typo-value, 4), mobile);
+        }
+    }
+}
+
+@mixin output-typography($font-family-type, $font-size, $line-height, $letter-spacing, $media-break-point){
+    $font-family:null;
+
+    @if($font-family-type == regular){
+        $font-family: $fonts-face-custom-regular;
+    }@else if($font-family-type == bold){
+        $font-family: $fonts-face-custom-bold;
+    }@else if($font-family-type == regular-g){
+        $font-family: $fonts-face-custom-regular-global;
+    }@else if($font-family-type == bold-g){
+        $font-family: $fonts-face-custom-bold-global;
+    }
+
+    @if($media-break-point == pc){
+        @include px-font('', $font-size, $line-height);
+    }@else if($media-break-point == tablet){
+        @include vw-font-tb('', $font-size, $line-height);
+    }@else if($media-break-point == mobile){
+        @include vw-font-mo('', $font-size, $line-height);
+    }
+
+    font-family: $font-family;
+    letter-spacing: $letter-spacing + em;
+}
+
+// 타이포 컴포넌트 스타일 생성
+html[lang="ko"] {
+    @each $typo-list, $typo-list-value in $typography-list-kr {
+        $typo-value: map_values($typo-list-value);
+        @include generator-for-typography($typo-list, $typo-value);
+    }
+}
+
+html[lang="en"] {
+    @each $typo-list, $typo-list-value in $typography-list-global {
+        $typo-value: map_values($typo-list-value);
+        @include generator-for-typography($typo-list, $typo-value);
+    }
+}
+
+
+// color text
+.white-txt{
+    color:#fff;
+}
+.black-txt{
+    color:#000;
+}
+
+@at-root {
+    //국문 폰트 스타일
+    html[lang="ko"] {
+        font-family: $fonts-face-custom-regular;
+
+
+
+        @include break-point($pc) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {@include font-device($fonts-face-kv-custom-light, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            }
+            .txt-kv-tit {@include font-device($fonts-face-custom-light, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include font-device($fonts-face-custom-regular, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include font-device($fonts-face-custom-bold, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include font-device($fonts-face-custom-regular, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include font-device($fonts-face-custom-bold, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include font-device($fonts-face-custom-regular, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include font-device($fonts-face-custom-bold, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include font-device($fonts-face-custom-regular, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include font-device($fonts-face-custom-bold, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include font-device($fonts-face-custom-regular, 36, 48); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include font-device($fonts-face-custom-bold, 36, 48); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include font-device($fonts-face-custom-regular, 24, 36); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include font-device($fonts-face-custom-bold, 24, 36); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include font-device($fonts-face-custom-regular, 18, 30); letter-spacing: -0.04em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include font-device($fonts-face-custom-bold, 18, 30); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            }
+            .txt-paragraph-small-bold{
+                @include font-device($fonts-face-custom-bold, 18, 30); letter-spacing: -0.04em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include common-convert-device(padding-left, 11);
+                @include font-device($fonts-face-custom-regular, 14, 20); letter-spacing: -0.04em; color: #666;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include font-device($fonts-face-custom-bold, 14, 20);
+                }
+            }
+        }
+
+        @include break-point($tablet) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {@include font-device($fonts-face-kv-custom-light, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            }
+            .txt-kv-tit {@include font-device($fonts-face-custom-light, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include font-device($fonts-face-custom-regular, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include font-device($fonts-face-custom-bold, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include font-device($fonts-face-custom-regular, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include font-device($fonts-face-custom-bold, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include font-device($fonts-face-custom-regular, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include font-device($fonts-face-custom-bold, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include font-device($fonts-face-custom-regular, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include font-device($fonts-face-custom-bold, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include font-device($fonts-face-custom-regular, 30, 48); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include font-device($fonts-face-custom-bold, 30, 48); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include font-device($fonts-face-custom-regular, 24, 36); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include font-device($fonts-face-custom-bold, 24, 36); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include font-device($fonts-face-custom-regular, 18, 30); letter-spacing: -0.04em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include font-device($fonts-face-custom-bold, 18, 30); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            }
+            .txt-paragraph-small-bold{
+                @include font-device($fonts-face-custom-bold, 18, 30); letter-spacing: -0.04em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include common-convert-device(padding-left, 11);
+                @include font-device($fonts-face-custom-regular, 14, 20); letter-spacing: -0.04em; color: #666;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include font-device($fonts-face-custom-bold, 14, 20);
+                }
+            }
+        }
+
+        @include break-point($mobile) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {
+                    @include vw-font-mo($fonts-face-kv-custom-light-global, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}
+                    -webkit-locale: "en";   //국문모바일(크롬엔진)에서만 발생하는 웹폰트 렌더링(키비주얼 타이포 줌인 모션흔들림) 해소를 위한 추가 스타일 정의
+                }
+            }
+            .txt-kv-tit {@include vw-font-mo($fonts-face-custom-light, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include vw-font-mo($fonts-face-custom-regular, 70, 92); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include vw-font-mo($fonts-face-custom-bold, 70, 92); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include vw-font-mo($fonts-face-custom-regular, 28, 52); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include vw-font-mo($fonts-face-custom-bold, 28, 52); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include vw-font-mo($fonts-face-custom-regular, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include vw-font-mo($fonts-face-custom-bold, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include vw-font-mo($fonts-face-custom-regular, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include vw-font-mo($fonts-face-custom-bold, 56, 76); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include vw-font-mo($fonts-face-custom-regular, 42, 54); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include vw-font-mo($fonts-face-custom-bold, 42, 54); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include vw-font-mo($fonts-face-custom-regular, 36, 54); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include vw-font-mo($fonts-face-custom-bold, 36, 54); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include vw-font-mo($fonts-face-custom-regular, 28, 52); letter-spacing: -0.04em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include vw-font-mo($fonts-face-custom-bold, 28, 52); letter-spacing: -0.04em; &.white-txt {color: #fff;}}
+            }
+            .txt-paragraph-small-bold{
+                @include vw-font-mo($fonts-face-custom-bold, 28, 52); letter-spacing: -0.04em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include vw-convert-mo(padding-left, 18);
+                @include vw-font-mo($fonts-face-custom-regular, 24, 38); letter-spacing: -0.04em; color: #666;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include vw-font-mo($fonts-face-custom-bold, 24, 38);
+                }
+            }
+        }
+    }
+
+    //영문 폰트 스타일
+    html[lang="en"] {
+        font-family: $fonts-face-custom-regular-global;
+
+        @include break-point($pc) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {@include font-device($fonts-face-kv-custom-light-global, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            }
+            .txt-kv-tit {@include font-device($fonts-face-custom-light-global, 70, 82); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include font-device($fonts-face-custom-regular-global, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include font-device($fonts-face-custom-regular-global, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include font-device($fonts-face-custom-regular-global, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include font-device($fonts-face-custom-bold-global, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include font-device($fonts-face-custom-regular-global, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include font-device($fonts-face-custom-bold-global, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include font-device($fonts-face-custom-regular-global, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include font-device($fonts-face-custom-bold-global, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include font-device($fonts-face-custom-regular-global, 36, 48); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include font-device($fonts-face-custom-bold-global, 36, 48); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include font-device($fonts-face-custom-regular-global, 24, 36); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include font-device($fonts-face-custom-bold-global, 24, 36); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include font-device($fonts-face-custom-regular-global, 18, 30); letter-spacing: -0.02em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include font-device($fonts-face-custom-bold-global, 18, 30);
+                    letter-spacing: -0.02em;
+                    &.white-txt {color: #fff;}
+                }
+            }
+            .txt-paragraph-small-bold {
+                @include font-device($fonts-face-custom-bold, 18, 30);
+                letter-spacing: -0.02em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include common-convert-device(padding-left, 11);
+                @include font-device($fonts-face-custom-regular-global, 14, 20); letter-spacing: -0.02em; color: #9f9f9f;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include font-device($fonts-face-custom-bold-global, 14, 20);
+                }
+            }
+        }
+
+        @include break-point($tablet) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {@include font-device($fonts-face-kv-custom-light-global, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            }
+            .txt-kv-tit {@include font-device($fonts-face-custom-light-global, 70, 82); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include font-device($fonts-face-custom-regular-global, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include font-device($fonts-face-custom-regular-global, 70, 82); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include font-device($fonts-face-custom-regular-global, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include font-device($fonts-face-custom-bold-global, 24, 46); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include font-device($fonts-face-custom-regular-global, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include font-device($fonts-face-custom-bold-global, 48, 64); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include font-device($fonts-face-custom-regular-global, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include font-device($fonts-face-custom-bold-global, 48, 64); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include font-device($fonts-face-custom-regular-global, 30, 48); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include font-device($fonts-face-custom-bold-global, 30, 48); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include font-device($fonts-face-custom-regular-global, 24, 36); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include font-device($fonts-face-custom-bold-global, 24, 36); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include font-device($fonts-face-custom-regular-global, 18, 30); letter-spacing: -0.02em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include font-device($fonts-face-custom-bold-global, 18, 30); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            }
+            .txt-paragraph-small-bold {
+                @include font-device($fonts-face-custom-bold, 18, 30);
+                letter-spacing: -0.02em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include common-convert-device(padding-left, 11);
+                @include font-device($fonts-face-custom-regular-global, 14, 20); letter-spacing: -0.02em; color: #666;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include font-device($fonts-face-custom-bold-global, 14, 20);
+                }
+            }
+        }
+
+        @include break-point($mobile) {
+            .sec-kv {   // date : 210203 / 키비주얼 서체 및 행간 변경
+                .txt-kv-tit {@include vw-font-mo($fonts-face-kv-custom-light-global, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            }
+            .txt-kv-tit {@include vw-font-mo($fonts-face-custom-light-global, 70, 92); letter-spacing: -0.015em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-regular {@include vw-font-mo($fonts-face-custom-regular-global, 70, 92); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-tit-bold {@include vw-font-mo($fonts-face-custom-regular-global, 70, 92); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit {@include vw-font-mo($fonts-face-custom-regular-global, 28, 52); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-kv-sub-tit-bold {@include vw-font-mo($fonts-face-custom-bold-global, 28, 52); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-tit {@include vw-font-mo($fonts-face-custom-regular-global, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-bold {@include vw-font-mo($fonts-face-custom-bold-global, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered {@include vw-font-mo($fonts-face-custom-regular-global, 56, 76); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-tit-centered-bold {@include vw-font-mo($fonts-face-custom-bold-global, 56, 76); letter-spacing: -0.02em; text-align: center; &.white-txt {color: #fff;}}
+
+            .txt-sub-tit {@include vw-font-mo($fonts-face-custom-regular-global, 42, 54); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-sub-tit-bold {@include vw-font-mo($fonts-face-custom-bold-global, 42, 54); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+
+            .txt-paragraph-big {@include vw-font-mo($fonts-face-custom-regular-global, 36, 54); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-big-bold {@include vw-font-mo($fonts-face-custom-bold-global, 36, 54); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            .txt-paragraph-small {
+                @include vw-font-mo($fonts-face-custom-regular-global, 28, 52); letter-spacing: -0.02em;
+                &.white-txt {color: #fff;}
+                .txt-emphasize {@include vw-font-mo($fonts-face-custom-bold-global, 28, 52); letter-spacing: -0.02em; &.white-txt {color: #fff;}}
+            }
+            .txt-paragraph-small-bold{
+                @include vw-font-mo($fonts-face-custom-bold, 28, 52); letter-spacing: -0.04em;
+            }
+
+            .txt-disclaimer {
+                display: block;
+                position: relative;
+                @include vw-convert-mo(padding-left, 18);
+                @include vw-font-mo($fonts-face-custom-regular-global, 24, 44); letter-spacing: -0.02em; color: #666;
+                &.white-txt {color: #fff;}
+
+                &:before {
+                    display: block;
+                    content: '*';
+                    position: absolute; top:0; left: 0;
+                }
+                &.align-center{
+                    padding-left: 0;
+                    &:before{
+                        display: inline;
+                        position: static;
+                    }
+                }
+                &.bold {
+                    @include vw-font-mo($fonts-face-custom-bold-global, 24, 44);
+                }
+            }
+        }
+    }
+}

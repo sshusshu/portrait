@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+
+// Breakpoint 기기 변수
+$mobile: (0, min);//0~
+
+$tablet: (0, 0); //0~0
+
+$pc-normal:     (0, 0); //0~0
+$pc-4k : (0, 0); // 0 ~0
+
+$tablet-pc :  (0, 0);//0~0
+$pc:     (0, 0); //0~0
+
+
+// skip Navigation
+#skip-navi{
+    position: absolute; top: 0; left: 0;
+    width: 100%;
+    z-index: 600;
+
+    a {
+        display: block;
+        position: absolute;
+        top: -9999px;
+
+        &:hover, &:active, &:focus{
+            display: inline-block;
+            top: 0;
+            width: 100%;
+        }
+
+        span {
+            display: block;
+            padding: 10px 0;
+            background: #fafafa;
+            border: 2px solid #666;
+            color: #000;
+            font-size: 16px;
+            text-align: center;
+        }
+    }
+}
+
+// browser Upgrage
+.browser-upgrade {
+    position: fixed; left: 0; top: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #efefef;
+    border-bottom: 2px solid #bababa;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #595959;
+
+    a {
+        font-size: 18px;
+        color: #0027AA;
+
+        &:hover {
+            color: #000;
+        }
+    }
+}
+
+.blind{
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    text-indent: -9999px !important;
+    font-size: 0 !important;
+    opacity:0;
+    overflow: hidden !important;
+}
+
+@import "custom/common/webfonts";
+
+@import "ds_core/globalvars/variables/common";
+@import "ds_core/globalvars/variables/fonts";
+
+@import "custom/etc/transitions";
+@import "custom/etc/common_mixin";
+
+@import "ds_core/utils/all_utils";
+
+@import "custom/common/related_stories";

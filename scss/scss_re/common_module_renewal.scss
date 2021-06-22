@@ -1,0 +1,22 @@
+@charset "utf-8";
+// common style
+@import "ds_core/globalvars/global_variables";
+
+@import "ds_core/common/normalize";
+@import "ds_core/common/base";
+@import "ds_core/common/helpers";
+
+@import "custom/etc/transitions";
+@import "custom/etc/common_mixin";
+// site style
+@import "ds_core/importer";
+@import "custom/common/webfonts";
+@import "custom/common/layout";
+@import "custom/common/header";
+@import "custom/common/footer";
+@import "custom/common/site_components";
+@import "custom/common/related_stories";
+
+
+@import "custom/etc/debug";
+
